@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Book;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class BookRepository
@@ -30,9 +31,8 @@ class BookRepository
             });
 
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
         }
     }
-
 }

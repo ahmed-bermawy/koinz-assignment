@@ -41,7 +41,7 @@ class ReadingIntervalRequest extends FormRequest
             'user_id' => 'required|exists:users,id',
             'book_id' => 'required|exists:books,id',
             'start_page' => 'required|numeric|min:1',
-            'end_page' => ['required', 'numeric','gte:start_page', new ValidEndPage($this->getBookId(), $this->bookRepository)],
+            'end_page' => ['required', 'numeric', 'gte:start_page', new ValidEndPage($this->getBookId(), $this->bookRepository)],
         ];
     }
 }

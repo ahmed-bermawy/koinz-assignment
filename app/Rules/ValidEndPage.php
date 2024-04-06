@@ -8,6 +8,7 @@ use Illuminate\Contracts\Validation\Rule;
 class ValidEndPage implements Rule
 {
     protected int $bookId;
+
     private BookRepository $bookRepository;
 
     public function __construct(int $bookId, BookRepository $bookRepository)
@@ -19,9 +20,10 @@ class ValidEndPage implements Rule
     public function passes($attribute, $value): bool
     {
         $book = $this->bookRepository->getDetail($this->bookId);
-        if (!$book) {
+        if (! $book) {
             return false;
         }
+
         return $value <= $book->pages;
     }
 

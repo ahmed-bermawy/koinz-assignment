@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-
 use App\Models\ReadingInterval;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
@@ -17,11 +16,12 @@ class ReadingIntervalRepository
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) {
                 Log::error($e->getMessage());
+
                 return [
-                    'message' =>[
-                        'error' => 'Duplicate entry.'
+                    'message' => [
+                        'error' => 'Duplicate entry.',
                     ],
-                    'code' => Response::HTTP_CONFLICT
+                    'code' => Response::HTTP_CONFLICT,
                 ];
             }
             throw $e;

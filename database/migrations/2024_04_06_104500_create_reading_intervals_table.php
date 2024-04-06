@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('reading_intervals', function (Blueprint $table) {
@@ -18,14 +15,11 @@ return new class extends Migration
             $table->integer('start_page');
             $table->integer('end_page');
             $table->index(['book_id', 'user_id']);
-            $table->unique(['user_id','book_id', 'start_page', 'end_page']);
+            $table->unique(['user_id', 'book_id', 'start_page', 'end_page']);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('reading_intervals');

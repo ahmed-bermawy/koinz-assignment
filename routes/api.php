@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/reading-intervals', [ReadingIntervalController::class, 'store'])->name('store');
-Route::get('/recommendations', [RecommendationController::class, 'getMostRecommended'])->name('recommendations');
+Route::post('reading-intervals', [ReadingIntervalController::class, 'store'])->name('store');
+Route::get('recommendations', [RecommendationController::class, 'getMostRecommended'])->name('recommendations');

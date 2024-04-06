@@ -13,12 +13,10 @@ class BookPagesCalculatorService
     public function __construct(
         BookRepository $bookRepository,
         ReadingIntervalRepository $readingIntervalRepository
-    )
-    {
+    ) {
         $this->bookRepository = $bookRepository;
         $this->readingIntervalRepository = $readingIntervalRepository;
     }
-
 
     public function calculatePagesForBook($bookId): void
     {
@@ -30,7 +28,7 @@ class BookPagesCalculatorService
 
             foreach ($bookPagesReadInterval as $readingInterval) {
                 for ($i = $readingInterval->start_page; $i < $readingInterval->end_page; $i++) {
-                    if (!in_array($i, $pages)) {
+                    if (! in_array($i, $pages)) {
                         $pages[] = $i;
                     }
                 }
@@ -39,5 +37,4 @@ class BookPagesCalculatorService
             $this->bookRepository->updateNumOfReadPages($book, count($pages));
         }
     }
-
 }

@@ -9,20 +9,16 @@ use App\Repositories\ReadingIntervalRepository;
 use App\Resources\ReadingIntervalResource;
 use App\Services\BookPagesCalculatorService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Log\Logger;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class ReadingIntervalController extends Controller
 {
-
     protected ReadingIntervalRepository $repository;
 
     public function __construct(
         ReadingIntervalRepository $repository,
         BookPagesCalculatorService $bookPagesCalculatorService
-    )
-    {
+    ) {
         $this->bookPagesCalculatorService = $bookPagesCalculatorService;
         $this->repository = $repository;
     }
@@ -32,10 +28,10 @@ class ReadingIntervalController extends Controller
         $readingInterval = $this->repository->create($request->validated());
         if ($readingInterval instanceof ReadingInterval) {
             $this->bookPagesCalculatorService->calculatePagesForBook($request->getBookId());
+
             return response()->json(ReadingIntervalResource::make($readingInterval), Response::HTTP_CREATED);
         }
 
         return response()->json($readingInterval['message'], $readingInterval['code']);
     }
-
 }
