@@ -1,0 +1,169 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Koins API Documentation",
+        "contact": {
+            "email": "ahmed_bermawy@yahoo.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api": {},
+        "/api/reading-intervals": {
+            "post": {
+                "tags": [
+                    "Reading Interval"
+                ],
+                "summary": "Store a new reading interval",
+                "operationId": "06208dc5efd7f64717cb1fb5906056d5",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReadingIntervalRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Reading interval created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReadingIntervalResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/recommendations": {
+            "get": {
+                "tags": [
+                    "Recommendations"
+                ],
+                "summary": "Get the most recommended books",
+                "operationId": "a1580812a28e923a4d650ea3a96a314d",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "book_id": {
+                                                "description": "The book ID",
+                                                "type": "integer"
+                                            },
+                                            "book_name": {
+                                                "description": "The book name",
+                                                "type": "string"
+                                            },
+                                            "num_of_read_pages": {
+                                                "description": "The book Number of pages",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ReadingIntervalRequest": {
+                "required": [
+                    "user_id",
+                    "book_id",
+                    "start_page",
+                    "end_page"
+                ],
+                "properties": {
+                    "user_id": {
+                        "description": "The user ID",
+                        "type": "integer"
+                    },
+                    "book_id": {
+                        "description": "The book ID",
+                        "type": "integer"
+                    },
+                    "start_page": {
+                        "description": "The start page",
+                        "type": "integer"
+                    },
+                    "end_page": {
+                        "description": "The end page",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ReadingIntervalResource": {
+                "required": [
+                    "id",
+                    "user_id",
+                    "book_id",
+                    "start_page",
+                    "end_page"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "The reading interval ID",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "description": "The user ID",
+                        "type": "integer"
+                    },
+                    "book_id": {
+                        "description": "The book ID",
+                        "type": "integer"
+                    },
+                    "start_page": {
+                        "description": "The start page",
+                        "type": "integer"
+                    },
+                    "end_page": {
+                        "description": "The end page",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
