@@ -185,4 +185,8 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'sms' => [
+        'url' => env('SMS_PROVIDER_URL', 'https://run.mocky.io/v3/8eb88272-d769-417c-8c5c-159bb023ec0a')
+    ],
+
 ];

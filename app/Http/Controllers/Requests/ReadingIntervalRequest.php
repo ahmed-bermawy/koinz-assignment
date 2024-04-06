@@ -30,6 +30,11 @@ class ReadingIntervalRequest extends FormRequest
         return $this->input('book_id');
     }
 
+    public function getUserId(): int
+    {
+        return $this->input('user_id');
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
