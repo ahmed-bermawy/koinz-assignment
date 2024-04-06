@@ -10,3 +10,4 @@
 6. Run `php artisan migrate`
 7. Run `php artisan db:seed`
 8. Run `php artisan serve`
+9. To access api documentation visit `http://localhost:8000/api/documentation`

@@ -5,7 +5,19 @@ namespace App\Http\Controllers\Requests;
 use App\Repositories\BookRepository;
 use App\Rules\ValidEndPage;
 use Illuminate\Foundation\Http\FormRequest;
+use OpenApi\Annotations as OA;
 
+/**
+ * @OA\Schema(
+ *     schema="ReadingIntervalRequest",
+ *     type="object",
+ *     required={"user_id", "book_id", "start_page", "end_page"},
+ *     @OA\Property(property="user_id", type="integer", description="The user ID"),
+ *     @OA\Property(property="book_id", type="integer", description="The book ID"),
+ *     @OA\Property(property="start_page", type="integer", description="The start page"),
+ *     @OA\Property(property="end_page", type="integer", description="The end page"),
+ * )
+ */
 class ReadingIntervalRequest extends FormRequest
 {
     private BookRepository $bookRepository;
