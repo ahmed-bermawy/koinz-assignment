@@ -21,9 +21,17 @@ class ReadingIntervalRepository
                     'message' =>[
                         'error' => 'Duplicate entry.'
                     ],
-                    'code' => Response::HTTP_CONFLICT];
+                    'code' => Response::HTTP_CONFLICT
+                ];
             }
             throw $e;
         }
+    }
+
+    public function getBookPagesReadInterval(int $id)
+    {
+        return ReadingInterval::select('id', 'start_page', 'end_page')
+            ->where('book_id', $id)
+            ->get();
     }
 }
