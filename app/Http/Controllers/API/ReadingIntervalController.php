@@ -35,18 +35,24 @@ class ReadingIntervalController extends Controller
      *     path="/api/reading-intervals",
      *     tags={"Reading Interval"},
      *     summary="Store a new reading interval",
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(ref="#/components/schemas/ReadingIntervalRequest")
      *     ),
+     *
      *     @OA\Response(
      *         response=201,
      *         description="Reading interval created successfully",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/ReadingIntervalResource")
      *     ),
+     *
      *     @OA\Response(
      *         response=400,
      *         description="Bad request",
+     *
      *         @OA\JsonContent(type="string")
      *     ),
      * )
