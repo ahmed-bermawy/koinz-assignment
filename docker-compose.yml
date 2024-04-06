@@ -1,0 +1,55 @@
+version: "3.7"
+services:
+    app:
+        container_name: koinz-assignment
+        restart: always
+        build:
+            args:
+                user: ahmed
+                uid: 1000
+            context: .
+            dockerfile: Dockerfile
+        working_dir: /var/www/html
+        volumes:
+            - .:/var/www/html
+        networks:
+            - app-network
+
+    nginx:
+        image: nginx:alpine
+        ports:
+            - "8006:80"
+        depends_on:
+            - app
+        volumes:
+            - ./:/var/www/html
+            - ./docker-compose/nginx:/etc/nginx/conf.d/
+        networks:
+            - app-network
+
+    db:
+        image: mysql:5.7
+        container_name: mysql
+        restart: always
+        environment:
+            MYSQL_DATABASE: koinz_assignment
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: 12345678
+
+        ports:
+            - "3307:3306"
+        volumes:
+            - db-data:/var/lib/mysql/
+            - ./docker-compose/mysql/my.cnf:/etc/mysql/my.cnf
+            - ./docker-compose/mysql/sql:/docker-entrypoint-initdb.d
+        networks:
+            - app-network
+
+volumes:
+    db-data:
+        driver: local
+
+networks:
+    app-network:
+        driver: bridge
