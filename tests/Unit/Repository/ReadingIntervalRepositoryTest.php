@@ -9,7 +9,6 @@ use Tests\TestCase;
 
 class ReadingIntervalRepositoryTest extends TestCase
 {
-
     public function setUp(): void
     {
         parent::setUp();
@@ -17,7 +16,11 @@ class ReadingIntervalRepositoryTest extends TestCase
         $this->readingIntervalModel = Mockery::mock(ReadingInterval::class);
         $this->readingIntervalRepository = Mockery::mock(ReadingIntervalRepository::class);
     }
-    public function testReadingIntervalCreationReturnsModelOnSuccess(): void
+
+    /**
+     * @test
+     */
+    public function readingIntervalCreationReturnsModelOnSuccess(): void
     {
         $this->readingIntervalRepository->shouldReceive('create')->andReturn($this->readingIntervalModel);
 

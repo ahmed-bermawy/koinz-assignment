@@ -16,10 +16,14 @@ class BookRepositoryTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->factory = new BookFactory();
-        $this->repository = new BookRepository();
+        $this->factory = new BookFactory;
+        $this->repository = new BookRepository;
     }
-    public function testMostRecommendedBooksReturnsExpectedBooks(): void
+
+    /**
+     * @test
+     */
+    public function mostRecommendedBooksReturnsExpectedBooks(): void
     {
         $repository = Mockery::mock(BookRepository::class);
         $repository->shouldReceive('getMostRecommendedBooks')->andReturn([
@@ -38,7 +42,10 @@ class BookRepositoryTest extends TestCase
         $this->assertEquals(100, $books[0]['num_of_read_pages']);
     }
 
-    public function testMostRecommendedBooksReturnsEmptyWhenNoBooks(): void
+    /**
+     * @test
+     */
+    public function mostRecommendedBooksReturnsEmptyWhenNoBooks(): void
     {
         $repository = Mockery::mock(BookRepository::class);
         $repository->shouldReceive('getMostRecommendedBooks')->andReturn([]);
@@ -48,21 +55,27 @@ class BookRepositoryTest extends TestCase
         $this->assertCount(0, $books);
     }
 
-    public function testUpdateNumOfReadPagesSuccessfullyUpdatesBook(): void
+    /**
+     * @test
+     */
+    public function updateNumOfReadPagesSuccessfullyUpdatesBook(): void
     {
         $book = $this->factory->make();
         $this->repository->updateNumOfReadPages($book, 100);
         $this->assertEquals(100, $book->getAttribute('num_of_read_pages'));
     }
 
-    public function testUpdateNumOfReadPagesRollsBackOnException(): void
+    /**
+     * @test
+     */
+    public function updateNumOfReadPagesRollsBackOnException(): void
     {
         $book = $this->factory->make();
         $numOfReadPages = $book->getAttribute('num_of_read_pages');
 
         DB::shouldReceive('rollBack')->once();
 
-        $repository = new BookRepository();
+        $repository = new BookRepository;
         $repository->updateNumOfReadPages($book, 100);
 
         $this->assertEquals($numOfReadPages, $book->getAttribute('num_of_read_pages'));
