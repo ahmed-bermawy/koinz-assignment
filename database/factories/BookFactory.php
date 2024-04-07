@@ -21,6 +21,7 @@ class BookFactory extends Factory
             'author' => fake()->name(),
             'description' => fake()->realText(),
             'pages' => fake()->numberBetween(10, 500),
+            'num_of_read_pages' => fake()->numberBetween(0, 10),
         ];
     }
 }
